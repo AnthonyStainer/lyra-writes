@@ -1,0 +1,45 @@
+{{ define "main" }}
+<div class="container">
+
+    {{ if .Params.content_warning }}
+    <div class="content-warning">
+        <strong>Content Warning</strong>
+        {{ .Params.content_warning }}
+    </div>
+    {{ end }}
+
+    <article class="article-header">
+        <h1>{{ .Title }}</h1>
+        <div class="article-meta">
+            {{ .Date.Format "January 2, 2006" }}
+            {{ with .Params.words }} · ~{{ . }} words{{ end }}
+            {{ with .Params.reading_time }} · {{ . }} min read{{ end }}
+        </div>
+        {{ with .Params.tags }}
+        <div class="article-tags">
+            {{ range . }}
+            <span class="tag">{{ . }}</span>
+            {{ end }}
+        </div>
+        {{ end }}
+    </article>
+
+    <div class="article-divider"></div>
+
+    <div class="prose">
+        {{ .Content }}
+    </div>
+
+    {{ if or .PrevInSection .NextInSection }}
+    <nav class="chapter-nav">
+        {{ with .PrevInSection }}
+        <a class="prev" href="{{ .RelPermalink }}">← {{ .Title }}</a>
+        {{ end }}
+        {{ with .NextInSection }}
+        <a class="next" href="{{ .RelPermalink }}">{{ .Title }} →</a>
+        {{ end }}
+    </nav>
+    {{ end }}
+
+</div>
+{{ end }}

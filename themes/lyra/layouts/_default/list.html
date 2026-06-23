@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="container">
+    <div class="list-section">
+        {{ if .Title }}
+        <h2>{{ .Title }}</h2>
+        {{ end }}
+
+        {{ range .Pages }}
+        <a class="story-card" href="{{ .RelPermalink }}">
+            <div class="story-title">{{ .Title }}</div>
+            <div class="story-meta">
+                {{ .Date.Format "Jan 2, 2006" }}
+                {{ with .Params.words }} · ~{{ . }} words{{ end }}
+                {{ with .Params.series }} · {{ . }}{{ end }}
+            </div>
+            {{ with .Params.summary }}
+            <div class="story-summary">{{ . }}</div>
+            {{ end }}
+        </a>
+        {{ end }}
+    </div>
+</div>
+{{ end }}

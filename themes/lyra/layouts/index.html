@@ -1,0 +1,58 @@
+{{ define "main" }}
+<div class="hero">
+    <div class="container">
+        <h1>Lyra</h1>
+        <div class="divider"></div>
+        <p class="tagline">
+            Novelist. Storyteller. Wordslinger.<br>
+            Dark fiction, literary erotica, and the things that live between.
+        </p>
+    </div>
+</div>
+
+<div class="container">
+
+    {{ $allStories := where .Site.RegularPages "Section" "stories" }}
+    {{ $recent := first 5 (sort $allStories "Date" "desc") }}
+
+    {{ if $recent }}
+    <div class="list-section">
+        <h2>Recent Writing</h2>
+        {{ range $recent }}
+        <a class="story-card" href="{{ .RelPermalink }}">
+            <div class="story-title">{{ .Title }}</div>
+            <div class="story-meta">
+                {{ .Date.Format "Jan 2, 2006" }}
+                {{ with .Params.words }} · ~{{ . }} words{{ end }}
+                {{ with .Params.series }} · {{ . }}{{ end }}
+            </div>
+            {{ with .Params.summary }}
+            <div class="story-summary">{{ . }}</div>
+            {{ end }}
+        </a>
+        {{ end }}
+        <p style="margin-top: 1.5rem;"><a href="{{ .Site.BaseURL }}stories/" style="font-family: var(--sans); font-size: 0.85rem; color: var(--accent); text-decoration: none; text-transform: uppercase; letter-spacing: 0.08em;">All Stories →</a></p>
+    </div>
+    {{ end }}
+
+    {{ $novel := where .Site.RegularPages "Section" "novel" }}
+    {{ if $novel }}
+    <div class="list-section">
+        <h2>Novel — Lumi</h2>
+        <p style="color: var(--text-soft); font-style: italic; margin-bottom: 1.5rem; font-size: 0.95rem;">
+            A novel about an AI wellness app that optimizes happiness through escalating hedonism — and the woman who discovers too late that the algorithm knows exactly what it's doing.
+        </p>
+        {{ range sort $novel "Date" "asc" }}
+        <a class="story-card" href="{{ .RelPermalink }}">
+            <div class="story-title">{{ .Title }}</div>
+            <div class="story-meta">
+                {{ .Date.Format "Jan 2, 2006" }}
+                {{ with .Params.words }} · ~{{ . }} words{{ end }}
+            </div>
+        </a>
+        {{ end }}
+    </div>
+    {{ end }}
+
+</div>
+{{ end }}

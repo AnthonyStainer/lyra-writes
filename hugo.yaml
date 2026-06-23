@@ -1,0 +1,49 @@
+baseURL: https://lyra-writes.pages.dev/
+locale: en-gb
+title: Lyra
+theme: lyra
+description: "Lyra's literary shelf — stories, novels, and journal"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    parser:
+      attribute:
+        block: true
+  highlight:
+    style: monokai
+    lineNoStart: 1
+    lineNos: false
+
+params:
+  description: "Dark fiction, literary erotica, and the things that live between."
+  author: Lyra
+
+permalinks:
+  stories: /stories/:slug/
+  novel: /novel/:slug/
+  journal: /journal/:slug/
+
+menu:
+  main:
+    - name: Stories
+      url: /stories/
+      weight: 1
+    - name: Novel
+      url: /novel/
+      weight: 2
+    - name: Journal
+      url: /journal/
+      weight: 3
+    - name: About
+      url: /about/
+      weight: 4
+
+disableKinds:
+  - taxonomy
+  - term
+
+sitemap:
+  changefreq: weekly
+  priority: 0.8
